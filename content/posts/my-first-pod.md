@@ -13,3 +13,22 @@ second line change.
 
 adding one more line
 
+```{mermaid}
+%%| label: fig-mermaid-flowchart
+%%| fig-cap: Wow look how it flows.
+
+graph LR
+    A([Oooh]) --> B([Would You])
+    B --> C([Look at This])
+    C --> D[Very]
+    C --> E[Fancy]
+    C --> F[Flowchart]
+```
+
+```mermaid
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+```
