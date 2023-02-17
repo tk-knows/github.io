@@ -1,0 +1,33 @@
+name: github pages
+
+on:
+  push:
+    branches:
+      - main  # Set a branch that will trigger a deployment
+  pull_request:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: tk-knows/github.io
+        with:
+          submodules: true  # Fetch Hugo themes (true OR recursive)
+          fetch-depth: 0    # Fetch all history for .GitInfo and .Lastmod
+
+      - name: Setup Hugo
+        uses: tk-knows/github.io 
+        with:
+          hugo-version: 'latest'
+          # extended: true
+          # uses: tk-knows/github.io@v2 --> v2 is the label/tag
+
+      - name: Build
+        run: hugo --minify
+
+      - name: Deploy
+        uses: tk-knows/github.io 
+        if: github.ref == 'refs/heads/main'
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./public
